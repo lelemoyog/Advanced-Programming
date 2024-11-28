@@ -24,12 +24,22 @@ public class WithdrawalTransaction extends BaseTransaction {
 
     // Method to print a transaction receipt or details
     public void printTransactionDetails() {
-        System.out.println("Deposit Trasaction: " + this.toString());
+        System.out.println("Transaction ID: " + getTransactionID());
+        System.out.println("Transaction Date: " + getDate().getTime());
+        System.out.println("Transaction Amount: " + getAmount());
     }
 
     /*
     Oportunity for assignment: implementing different form of withdrawal
      */
+
+//    Implement method overriding in the Derived Classes:
+//            – Modify the implementations of  DepositTransaction  and  WithdrawalTransaction classes to override the definition of the  apply()  method inherited from
+//    the  BaseTransaction  class.
+//            – Ensure to implement specifications for all methods defined in the  BaseTransaction
+//    class
+
+    @Override
     public void apply(BankAccount ba) {
         double curr_balance = ba.getBalance();
         if (curr_balance > getAmount()) {

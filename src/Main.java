@@ -1,4 +1,7 @@
 import Lecture1_adt.*; // Import all classes from Lecture1_adt package to be used in this client code
+import Lecture4_interfaces_abstract_classes.BankAccount;
+import Lecture4_interfaces_abstract_classes.DepositTrasaction;
+import Lecture4_interfaces_abstract_classes.WithdrawalTransaction;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -149,16 +152,59 @@ public class Main {
     public static void testBaseTransaction() {
         Calendar d1 = new GregorianCalendar();
         BaseTransaction t1 = new BaseTransaction(1000, d1, "1");
+        BankAccount ba = new BankAccount( 10000);
+
+        t1.apply(ba);
 
         System.out.println(t1.toString());
         System.out.println("BaseTransaction Amount: \t " + t1.getAmount());
         System.out.println("BaseTransaction Date: \t " + t1.getDate());
         System.out.println("BaseTransaction TransactionID: \t " + t1.getTransactionID());
         System.out.println("BaseTransaction Transaction Details: \t ");
-
-
         t1.printTransactionDetails();
+        System.out.println("BaseTransaction Bank Account Balance: \t " + ba.getBalance());
 
+        // Please note that the Client Codes can access the data in the class directly through the dot operator
+        // This kind of exposure is a threat to both the Representation Independence and Preservation of Invariants
+    }
+
+    //Test the DepositTransaction class
+
+    public static void testDepositTransaction() {
+        Calendar d1 = new GregorianCalendar();
+        DepositTrasaction t1 = new DepositTrasaction(500, d1);
+        BankAccount ba = new BankAccount( 10000);
+
+        t1.apply(ba);
+
+        System.out.println(t1.toString());
+        System.out.println("DepositTransaction Amount: \t " + t1.getAmount());
+        System.out.println("DepositTransaction Date: \t " + t1.getDate());
+        System.out.println("DepositTransaction TransactionID: \t " + t1.getTransactionID());
+        System.out.println("DepositTransaction Transaction Details: \t ");
+        t1.printTransactionDetails();
+        System.out.println("DepositTransaction Bank Account Balance: \t " + ba.getBalance());
+
+        // Please note that the Client Codes can access the data in the class directly through the dot operator
+        // This kind of exposure is a threat to both the Representation Independence and Preservation of Invariants
+    }
+
+    //test the WithdrawalTransaction class
+
+    public static void testWithdrawalTransaction() {
+        Calendar d1 = new GregorianCalendar();
+        WithdrawalTransaction t1 = new WithdrawalTransaction(500, d1);
+        BankAccount ba = new BankAccount( 10000);
+
+        t1.apply(ba);
+
+        System.out.println(t1.toString());
+        System.out.println("WithdrawalTransaction Amount: \t " + t1.getAmount());
+        System.out.println("WithdrawalTransaction Date: \t " + t1.getDate());
+        System.out.println("WithdrawalTransaction TransactionID: \t " + t1.getTransactionID());
+        System.out.println("WithdrawalTransaction Transaction Details: \t ");
+        t1.printTransactionDetails();
+        System.out.println("WithdrawalTransaction Bank Account Balance: \t " + ba.getBalance());
 
         // Please note that the Client Codes can access the data in the class directly through the dot operator
         // This kind of exposure is a threat to both the Representation Independence and Preservation of Invariants
@@ -172,6 +218,8 @@ public class Main {
 //         testTransaction2();
 //         testTransaction3();
 //         testTransaction4();
-        testBaseTransaction();
+    //    testBaseTransaction();
+      //  testDepositTransaction();
+          testWithdrawalTransaction();
     }
 }
