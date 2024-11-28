@@ -7,7 +7,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Scanner;
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 /*
@@ -206,6 +206,15 @@ public class Main {
         t1.printTransactionDetails();
         System.out.println("WithdrawalTransaction Bank Account Balance: \t " + ba.getBalance());
 
+        //prompt for reversal
+        //prompt
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Do you want to reverse the transaction? (yes/no)");
+        String response = scanner.nextLine();
+        if (response.equals("yes")) {
+            t1.reverse(ba);
+            System.out.println("WithdrawalTransaction Bank Account Balance after reversal: \t " + ba.getBalance());
+        }
         // Please note that the Client Codes can access the data in the class directly through the dot operator
         // This kind of exposure is a threat to both the Representation Independence and Preservation of Invariants
     }
