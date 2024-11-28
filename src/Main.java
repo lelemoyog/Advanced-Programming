@@ -144,13 +144,34 @@ public class Main {
     }
 
 
+//    test base transaction
+
+    public static void testBaseTransaction() {
+        Calendar d1 = new GregorianCalendar();
+        BaseTransaction t1 = new BaseTransaction(1000, d1, "1");
+
+        System.out.println(t1.toString());
+        System.out.println("BaseTransaction Amount: \t " + t1.getAmount());
+        System.out.println("BaseTransaction Date: \t " + t1.getDate());
+        System.out.println("BaseTransaction TransactionID: \t " + t1.getTransactionID());
+        System.out.println("BaseTransaction Transaction Details: \t ");
+
+
+        t1.printTransactionDetails();
+
+
+        // Please note that the Client Codes can access the data in the class directly through the dot operator
+        // This kind of exposure is a threat to both the Representation Independence and Preservation of Invariants
+    }
+
     public static void main(String[] args) {
         // This is the client code
         // Uncomment the following lines to test the class which you would like to test
 
-        // testTransaction1()
-        // testTransaction2()
-        // testTransaction3()
-        // testTransaction4()
+//         testTransaction1();
+//         testTransaction2();
+//         testTransaction3();
+//         testTransaction4();
+        testBaseTransaction();
     }
 }

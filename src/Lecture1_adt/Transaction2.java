@@ -10,9 +10,9 @@ import java.util.Calendar;
  * 1. Representation Independence: --- Encapsulation - Providing access methods to the internal data.
  *                                     External client code only access via allowable operations
  *                                 --- Changes to internal representation can still be accessed via same methods defined
- *
+
  * 2. Preservation of Invariants: --- Access Modifies private final makes the data Unchangeable
- *
+
  * Lecture1_adt
  */
 
