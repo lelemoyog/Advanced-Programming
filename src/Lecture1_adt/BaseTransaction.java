@@ -27,14 +27,15 @@ import Lecture4_interfaces_abstract_classes.TransactionInterface;
 import java.util.Calendar;
 
 public class BaseTransaction implements TransactionInterface {
-    private final int amount;
+    private final double amount;
     private final Calendar date;
     private final String transactionID;
 
-    public BaseTransaction(int amount, Calendar date, String transactionID) {
+    public BaseTransaction(double amount, Calendar date) {
         this.amount = amount;
         this.date = date;
-        this.transactionID = transactionID;
+        int uniq = (int) Math.random()*10000;
+        transactionID = date.getTime().toString()+uniq;
     }
 
     @Override
@@ -60,7 +61,7 @@ public class BaseTransaction implements TransactionInterface {
     }
 
     @Override
-    public void apply(BankAccount ba) {
+    public void apply(BankAccount ba) throws InsufficientFundsException {
         System.out.println("Applying transaction to bank account");
     }
 }

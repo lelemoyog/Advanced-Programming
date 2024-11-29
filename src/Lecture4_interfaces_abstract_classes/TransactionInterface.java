@@ -1,4 +1,6 @@
 package Lecture4_interfaces_abstract_classes;
+import Lecture1_adt.InsufficientFundsException;
+
 import java.util.Calendar;
 
 /**
@@ -18,7 +20,7 @@ public interface TransactionInterface {
 
     void printTransactionDetails();
 
-    void apply(BankAccount ba);
+    void apply(BankAccount ba) throws InsufficientFundsException;
 }
 
 

@@ -1,7 +1,7 @@
 import Lecture1_adt.*; // Import all classes from Lecture1_adt package to be used in this client code
 import Lecture4_interfaces_abstract_classes.BankAccount;
-import Lecture4_interfaces_abstract_classes.DepositTrasaction;
-import Lecture4_interfaces_abstract_classes.WithdrawalTransaction;
+import Lecture1_adt.DepositTrasaction;
+import Lecture1_adt.WithdrawalTransaction;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -151,10 +151,14 @@ public class Main {
 
     public static void testBaseTransaction() {
         Calendar d1 = new GregorianCalendar();
-        BaseTransaction t1 = new BaseTransaction(1000, d1, "1");
+        BaseTransaction t1 = new BaseTransaction(1000, d1);
         BankAccount ba = new BankAccount( 10000);
 
-        t1.apply(ba);
+        try {
+            t1.apply(ba);
+        } catch (InsufficientFundsException e) {
+            System.out.println(e.getMessage());
+        }
 
         System.out.println(t1.toString());
         System.out.println("BaseTransaction Amount: \t " + t1.getAmount());
@@ -178,9 +182,9 @@ public class Main {
         t1.apply(ba);
 
         System.out.println(t1.toString());
-        System.out.println("DepositTransaction Amount: \t " + t1.getAmount());
-        System.out.println("DepositTransaction Date: \t " + t1.getDate());
-        System.out.println("DepositTransaction TransactionID: \t " + t1.getTransactionID());
+//        System.out.println("DepositTransaction Amount: \t " + t1.getAmount());
+//        System.out.println("DepositTransaction Date: \t " + t1.getDate());
+//        System.out.println("DepositTransaction TransactionID: \t " + t1.getTransactionID());
         System.out.println("DepositTransaction Transaction Details: \t ");
         t1.printTransactionDetails();
         System.out.println("DepositTransaction Bank Account Balance: \t " + ba.getBalance());
@@ -191,12 +195,16 @@ public class Main {
 
     //test the WithdrawalTransaction class
 
-    public static void testWithdrawalTransaction() {
+    public static void testWithdrawalTransaction() throws InsufficientFundsException {
         Calendar d1 = new GregorianCalendar();
         WithdrawalTransaction t1 = new WithdrawalTransaction(500, d1);
-        BankAccount ba = new BankAccount( 10000);
+        BankAccount ba = new BankAccount( 1000);
 
-        t1.apply(ba);
+        try {
+            t1.apply(ba);
+        } catch (InsufficientFundsException e) {
+            System.out.println(e.getMessage());
+        }
 
         System.out.println(t1.toString());
         System.out.println("WithdrawalTransaction Amount: \t " + t1.getAmount());
@@ -206,6 +214,8 @@ public class Main {
         t1.printTransactionDetails();
         System.out.println("WithdrawalTransaction Bank Account Balance: \t " + ba.getBalance());
 
+        // Test the overloaded apply method
+        t1.apply(ba, true);
         //prompt for reversal
         //prompt
         Scanner scanner = new Scanner(System.in);
@@ -214,6 +224,8 @@ public class Main {
         if (response.equals("yes")) {
             t1.reverse(ba);
             System.out.println("WithdrawalTransaction Bank Account Balance after reversal: \t " + ba.getBalance());
+        }else if (response.equals("no")){
+            System.out.println("WithdrawalTransaction Bank Account Balance: \t " + ba.getBalance());
         }
         // Please note that the Client Codes can access the data in the class directly through the dot operator
         // This kind of exposure is a threat to both the Representation Independence and Preservation of Invariants
@@ -223,12 +235,18 @@ public class Main {
         // This is the client code
         // Uncomment the following lines to test the class which you would like to test
 
-//         testTransaction1();
+       //  testTransaction1();
 //         testTransaction2();
 //         testTransaction3();
 //         testTransaction4();
-    //    testBaseTransaction();
-      //  testDepositTransaction();
-          testWithdrawalTransaction();
+//      testBaseTransaction();
+        //testDepositTransaction();
+
+        try {
+            testWithdrawalTransaction();
+        } catch (InsufficientFundsException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }

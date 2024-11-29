@@ -1,11 +1,12 @@
-package Lecture4_interfaces_abstract_classes;
+package Lecture1_adt;
 
+import Lecture4_interfaces_abstract_classes.BankAccount;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Calendar;
 
 public class DepositTrasaction extends BaseTransaction {
-    public DepositTrasaction(int amount, @NotNull Calendar date){
+    public DepositTrasaction(double amount, @NotNull Calendar date){
         super(amount, date);
     }
     private boolean checkDepositAmount(int amt){
